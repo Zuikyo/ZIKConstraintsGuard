@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-                    iOS constraint debug
+    iOS auto layout engine doesn't show the info about which view or view controller contains the bad constraint when constraint conflict happens.This tool can monitor constraint conflict,and gives more information.
                    DESC
 
   s.homepage     = "https://github.com/Zuikyo/ZIKConstraintsGuard"
@@ -80,7 +80,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "git@github.com:Zuikyo/ZIKConstraintsGuard.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/Zuikyo/ZIKConstraintsGuard.git", :tag => "#{s.version}" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
