@@ -28,11 +28,6 @@ static ZIKUnsatisfiableConstraintHandler monitorHandler;
     dispatch_once(&onceToken, ^{
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-        replaceMethodWithMethod(NSClassFromString(@"NSISEngine"),
-                                @selector(handleUnsatisfiableRowWithHead:body:usingInfeasibilityHandlingBehavior:mutuallyExclusiveConstraints:),
-                                [self class],
-                                @selector(o_handleUnsatisfiableRowWithHead:body:usingInfeasibilityHandlingBehavior:mutuallyExclusiveConstraints:));
-        
         SEL originalSelector = selectorFromASCII(kOriginalUnsatisfiableConstraintHandleSelectorASCII);
         replaceMethodWithMethod([UIView class],
                                 originalSelector,
@@ -42,11 +37,6 @@ static ZIKUnsatisfiableConstraintHandler monitorHandler;
     });
     
     monitorHandler = handler;
-}
-
-+ (id)o_handleUnsatisfiableRowWithHead:(id)arg1 body:(id)arg2 usingInfeasibilityHandlingBehavior:(int)arg3 mutuallyExclusiveConstraints:(id *)arg4 {
-    id result = [self o_handleUnsatisfiableRowWithHead:arg1 body:arg2 usingInfeasibilityHandlingBehavior:arg3 mutuallyExclusiveConstraints:arg4];
-    return result;
 }
 
 + (void)o_engine:(id)engine willBreakConstraint:(id)breakConstraint currentConstraints:(id)currentConstraints {
