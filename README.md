@@ -135,7 +135,7 @@ pod 'ZIKConstraintsGuard'
 -[UIView engine:willBreakConstraint:dueToMutuallyExclusiveConstraints:]
 ```
 
-系统用于检测当前view是否调用了`[super layoutSubviews]`的方法:
+系统用于检测当前view是否调用了`[super layoutSubviews]`的API:
 
 ```
 -[UIView _wantsWarningForMissingSuperLayoutSubviews]
