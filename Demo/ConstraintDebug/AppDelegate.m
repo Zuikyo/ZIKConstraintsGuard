@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ZIKConstraintsGuard.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,25 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [ZIKConstraintsGuard monitorUnsatisfiableConstraintWithHandler:^(UIView *view, UIViewController *viewController, NSLayoutConstraint *constraintToBreak, NSArray<NSLayoutConstraint *> *currentConstraints, NSString *description) {
+        
+        NSString *className = NSStringFromClass([viewController class]);
+        if ([className hasPrefix:@"UI"] && ![className isEqualToString:@"UINavigationController"]) {
+            NSLog(@"ignore conflict in system view:%@",viewController);
+            return;
+        }
+        
+        //write error to your log file
+        NSLog(@"%@",description);
+    }];
+    
+    [ZIKConstraintsGuard monitorErrorFromLayoutviewsWithHandler:^(UIView * _Nonnull view, UIViewController * _Nullable viewController, NSString * _Nonnull description) {
+        
+        //write error to your log file before crash
+        NSLog(@"%@",description);
+    }];
+    
     return YES;
 }
 

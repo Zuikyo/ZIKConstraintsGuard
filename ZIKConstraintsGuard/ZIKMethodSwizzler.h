@@ -10,7 +10,7 @@
 
 
 /**
- find the originalSelector method in originalClass,and the swizzledSelector method in swizzledClass.Then replace the original method with the swizzled method.When searching method in class,search the instance method first,if not exist,then class method.
+ find the originalSelector method in originalClass,and the swizzledSelector method in swizzledClass.If both exist, replace them.When searching method in class,search the instance method first,if not exist,then class method.
  
  @return true if replace successfully,otherwise false.
  */
