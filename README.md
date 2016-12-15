@@ -1,7 +1,7 @@
 # ZIKConstraintsGuard
 A tool for debugging iOS view constraint.Monitor constraint conflict and crash problem below iOS7.
 
-##Feature
+##Features
 
 * monitor constraint conflict.
 * monitor crash below iOS7 causing by layoutSubviews.
@@ -10,22 +10,22 @@ A tool for debugging iOS view constraint.Monitor constraint conflict and crash p
 	* the view controller
 	* all current constraints
 	* the constraint to be breaked
-	* ambiguous ayout
+	* ambiguous layout
 	* view hierarchy
 
 With the view and view controller, you can quickly find out the exactly wrong constraint and which view it came from.
 
-## iOS7 debugging
+## Apple's bug below iOS7
 
 When implementation your custom view's -layoutSubviews, remember:
  
- 1.Call [super layoutSubviews].
+ 1.Call `[super layoutSubviews]`.
  
- 2.Don't add constraints in -layoutSubviews.
+ 2.Don't add constraints in `-layoutSubviews`.
  
- If not, adding subview to this view in iOS6 or iOS7 will crash you app with 'Auto Layout still required after executing - layoutSubviews..' printed in console.Apple fix this after iOS8.
+ If not, adding subview to this view in iOS6 or iOS7 will crash you app with `'Auto Layout still required after executing - layoutSubviews..'` printed in console.Apple fixed this after iOS8.
  
- Some system view like UITableView,UITableViewCell doesn't call [super layoutSubviews]. So don't add subview to them in iOS6 and iOS7, or you can use method swizzling to fix them.
+ Some system view like UITableView,UITableViewCell doesn't call `[super layoutSubviews]`. So don't add subview to them in iOS6 and iOS7, or you can use method swizzling to fix them.
 
 If your app need to support iOS7,this will offer a great help,since Xcode8 can't debug iOS7 device any more.
 
@@ -40,34 +40,36 @@ pod 'ZIKConstraintsGuard'
 ##How to use
 
 ```
+//monitor constraint conflict
 [ZIKConstraintsGuard monitorUnsatisfiableConstraintWithHandler:^(UIView *view, 
 																 UIViewController *viewController, 
 																 NSLayoutConstraint *constraintToBreak, 
 																 NSArray<NSLayoutConstraint *> *currentConstraints, 
 																 NSString *description) {
         
-        NSString *className = NSStringFromClass([viewController class]);
-        if ([className hasPrefix:@"UI"] && ![className isEqualToString:@"UINavigationController"]) {
-            NSLog(@"ignore conflict in system view:%@",viewController);
-            return;
-        }
+    NSString *className = NSStringFromClass([viewController class]);
+    if ([className hasPrefix:@"UI"] && ![className isEqualToString:@"UINavigationController"]) {
+        NSLog(@"ignore conflict in system view:%@",viewController);
+        return;
+    }
+    
+    //formatted description with enough debugging info, write to your log file
+    NSLog(@"%@",description);
+}];
+```
+
+```
+//monitor crash below iOS7
+[ZIKConstraintsGuard monitorErrorFromLayoutviewsWithHandler:^(UIView * _Nonnull view, UIViewController * _Nullable viewController, NSString * _Nonnull description) {
         
-        //formatted description with enough debugging info, write to your log file
-        NSLog(@"%@",description);
-    }];
+    //write error info to your log file before crash
+    NSLog(@"%@",description);
+}];
 ```
 
-```
-    [ZIKConstraintsGuard monitorErrorFromLayoutviewsWithHandler:^(UIView * _Nonnull view, UIViewController * _Nullable viewController, NSString * _Nonnull description) {
-        
-        //write error info to your log file before crash
-        NSLog(@"%@",description);
-    }];
-```
+##How it works
 
-##How it work
-
-Hook private API to get the UIView.Then get other information from the UIView.
+Hook private API to get the UIView.Then get other informations from the UIView.
 
 API when meet unsatisfiable constraint:
 
@@ -80,7 +82,7 @@ API when system checking if view miss to call super layoutSubviews:
 ```
 -[UIView _wantsWarningForMissingSuperLayoutSubviews]
 ```
-
+These private API names were encrypted when using.
 ___
 
 一个调试iOS约束的工具。可以检测约束冲突和iOS7以下的crash问题。

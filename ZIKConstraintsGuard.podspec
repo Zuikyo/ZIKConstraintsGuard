@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "ZIKConstraintsGuard"
-  s.version      = "1.0"
-  s.summary      = "tool for debugging iOS view constraint conflict"
+  s.version      = "1.1"
+  s.summary      = "A tool for debugging iOS view constraint.Monitor constraint conflict and crash problem below iOS7."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-    iOS auto layout engine doesn't show the info about which view or view controller contains the bad constraint when constraint conflict happens.This tool can monitor constraint conflict,and gives more information.
+    iOS auto layout engine doesn't show the info about which view or view controller contains the bad constraint when constraint conflict or crash happens.This tool can monitor constraint conflict and crash,and gives more specific information.
                    DESC
 
   s.homepage     = "https://github.com/Zuikyo/ZIKConstraintsGuard"
