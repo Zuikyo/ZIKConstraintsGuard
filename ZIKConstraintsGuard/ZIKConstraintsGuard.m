@@ -104,7 +104,6 @@ static ZIKErrorFromLayoutviewsHandler errorFromLayoutviewsHandler;
 + (NSString *)o_descriptionForUnsatisfiableConstraintWithView:(UIView *)view viewController:(UIViewController *)viewController constraintToBreak:(NSLayoutConstraint *)constraintToBreak currentConstraints:(NSArray<NSLayoutConstraint*> *)currentConstraints {
     NSMutableString *description = [NSMutableString string];
     [description appendFormat:@"constraint conflict in viewController:\n%@\nview:\n%@\n",viewController,view];
-    [description appendFormat:@"ambiguous layout:\n%@\n",[view o_ambiguousLayoutInfo]];
     [description appendFormat:@"view hierarchy:\n%@\n",[view o_viewHierarchyInfo]];
     [description appendFormat:@"current constraints:\n%@\n",currentConstraints];
     [description appendFormat:@"try to break constraint:\n%@",constraintToBreak];

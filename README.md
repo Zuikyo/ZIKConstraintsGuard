@@ -10,7 +10,6 @@ A tool for debugging iOS view constraint.Monitor constraint conflict and crash p
 	* the view controller
 	* all current constraints
 	* the constraint to be breaked
-	* ambiguous layout
 	* view hierarchy
 
 With the view and view controller, you can quickly find out the exactly wrong constraint and which view it came from.
@@ -95,7 +94,6 @@ ___
 	* 冲突所在的view controller
 	* 目前所有的约束
 	* 系统将要打破的约束
-	* 有歧义的layout
 	* view层级
 
 通过捕捉到的view和view controller，就可以快速地找到是哪个界面的哪个控件的哪个约束出现了问题。

@@ -23,8 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable UIView *)o_recursiveSearchSubviewWithClass:(Class)viewClass;
 ///view controller of the view
 - (UIViewController *)o_viewController;
-///get info about ambiguous layout; use private API -[UIView _autolayoutTrace].Selector name encrypted
-- (NSString *)o_ambiguousLayoutInfo;
 ///get view hierarchy; use private API -[UIView recursiveDescription].Selector name encrypted
 - (NSString *)o_viewHierarchyInfo;
 @end
