@@ -24,13 +24,13 @@ typedef void(^ZIKUnsatisfiableConstraintHandler)(UIView *view, UIViewController 
 /**
  callback when meet problem about 'Auto Layout still required after executing...'.
 
- @param view               the view where baddly implementation it's -layoutviews
+ @param view               the view where baddly implementation it's -layoutSubviews
  @param viewController     view controller of view
  @param description        formatted description contains enough debug information
  */
-typedef void(^ZIKErrorFromLayoutviewsHandler)(UIView *view,  UIViewController * _Nullable viewController, NSString *description);
+typedef void(^ZIKErrorFromLayoutviewsHandler)(UIView *view,  UIViewController *_Nullable viewController, NSString *description);
 
-///monitor constraint conflict problem
+///monitor constraint problem
 @interface ZIKConstraintsGuard : NSObject
 
 /**
